@@ -8,9 +8,8 @@ dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
 
-\.classpath
-
-\.project
+# Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
+!/.mvn/wrapper/maven-wrapper.jar
 
 \.settings/
 
@@ -18,6 +17,6 @@ buildNumber.properties
 
 \.mvn/wrapper/maven-wrapper\.properties
 
-mvnw\.cmd
+\.project
 
-mvnw
+\.classpath
