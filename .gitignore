@@ -7,3 +7,17 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+
+\.classpath
+
+\.project
+
+\.settings/
+
+\.mvn/wrapper/maven-wrapper\.jar
+
+\.mvn/wrapper/maven-wrapper\.properties
+
+mvnw\.cmd
+
+mvnw
