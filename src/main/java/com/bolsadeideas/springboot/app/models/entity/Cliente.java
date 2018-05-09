@@ -13,7 +13,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-@Table(name="Clientes")
+@Table(name="clientes")
 public class Cliente  implements Serializable{
 
 	private static final long serialVersionUID = 1L;
@@ -22,8 +22,7 @@ public class Cliente  implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 	
-	
-	private String name;
+	private String nombre;
 	private String apellido;
 	private String email;
 	
@@ -37,11 +36,11 @@ public class Cliente  implements Serializable{
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getName() {
-		return name;
+	public String getNombre() {
+		return nombre;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
 	}
 	public String getApellido() {
 		return apellido;
@@ -63,8 +62,7 @@ public class Cliente  implements Serializable{
 	}
 	@Override
 	public String toString() {
-		return "Cliente [id=" + id + ", name=" + name + ", apellido=" + apellido + ", email=" + email + ", createdAt="
-				+ createAt + "]";
+		return "Cliente [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", email=" + email
+				+ ", createAt=" + createAt + "]";
 	}
-
 }
