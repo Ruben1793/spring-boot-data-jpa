@@ -35,9 +35,17 @@ public class ClienteDaoImpl implements IClienteDao {
 	}
 
 	@Override
-	public Cliente findOne(Long id) {
+	@Transactional(readOnly = true)
+	public Cliente findOne(long id) {
 		// TODO Auto-generated method stub
 		return em.find(Cliente.class, id);
+	}
+
+	@Override
+	@Transactional
+	public void delete(long id) {
+		// TODO Auto-generated method stub
+		em.remove(findOne(id));
 	}
 
 	
