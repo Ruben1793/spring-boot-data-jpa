@@ -51,6 +51,10 @@ public class PageRender<T>  {
 		}	
 	}
 	
+	public String getUrl() {
+		return url;
+	}
+	
 	public int getTotalPaginas() {
 		return totalPaginas;
 	}
