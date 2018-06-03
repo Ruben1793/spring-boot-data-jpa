@@ -5,9 +5,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.validation.Valid;
 
+import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,6 +38,8 @@ public class ClienteController {
 
 	@Autowired
 	private IClienteService clienteService;
+	
+	private final Logger log = LoggerFactory.getLogger(getClass()); 
 	
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable("id") long id, Map<String, Object> model, RedirectAttributes flash) {
@@ -74,16 +79,16 @@ public class ClienteController {
 			return "form";
 		}
 		if(!foto.isEmpty()) {
-			String rootPath = "C://Temp//uploads";
-			
+			String uniqueFilename = UUID.randomUUID().toString() + "-" + foto.getOriginalFilename();
+			Path rootPath = Paths.get("uploads").resolve(uniqueFilename);
+			Path rootAbsolutePath = rootPath.toAbsolutePath();
+			log.info("rootpath: " + rootPath);
+			log.info("rootAbsolutePath", rootAbsolutePath.toString());
 			try {
-				byte[] bytes = foto.getBytes();
-				Path rutaCompleta = Paths.get(rootPath + "//" + foto.getOriginalFilename());
-				Files.write(rutaCompleta, bytes);
-				flash.addFlashAttribute("info", "Has subido correctamente '" + foto.getOriginalFilename() + "'");
-				cliente.setFoto(foto.getOriginalFilename());
+				Files.copy(foto.getInputStream(), rootAbsolutePath);
+				flash.addFlashAttribute("info", "Has subido correctamente '" + uniqueFilename + "'");
+				cliente.setFoto(uniqueFilename);
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
