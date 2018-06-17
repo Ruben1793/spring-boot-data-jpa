@@ -35,6 +35,7 @@
 							<input type="text" name="buscar_producto" id="buscar_producto" class="form-control" />
 						</div>
 					</div>
+					<table th:replace="facturas/platilla-items :: itemsFactura"></table>
 					<div class="form-group">
 						<div class="col-sm-6">
 							<input type="submit" th:value="${titulo}" class="btn btn-secondary" />
