@@ -9,13 +9,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.bolsadeideas.springboot.app.models.dao.IClienteDao;
+import com.bolsadeideas.springboot.app.models.dao.IProductoDao;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
+import com.bolsadeideas.springboot.app.models.entity.Producto;
 
 @Service
 public class ClienteServiceImpl implements IClienteService{
 
 	@Autowired
 	IClienteDao clienteDao;
+	
+	@Autowired
+	IProductoDao productoDao;
 
 	@Override
 	@Transactional(readOnly = true)
@@ -51,4 +56,10 @@ public class ClienteServiceImpl implements IClienteService{
 		return clienteDao.findAll(pageable);
 	}
 
+	@Override
+	public List<Producto> findByNombre(String term) {
+		// TODO Auto-generated method stub
+		return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
+	}
+	
 }
