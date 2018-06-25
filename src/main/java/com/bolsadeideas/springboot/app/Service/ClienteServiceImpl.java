@@ -56,12 +56,14 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public Page<Cliente> findAll(Pageable pageable) {
 		// TODO Auto-generated method stub
 		return clienteDao.findAll(pageable);
 	}
 
 	@Override
+	@Transactional(readOnly = true)
 	public List<Producto> findByNombre(String term) {
 		// TODO Auto-generated method stub
 		return productoDao.findByNombreLikeIgnoreCase("%" + term + "%");
@@ -74,10 +76,17 @@ public class ClienteServiceImpl implements IClienteService{
 	}
 
 	@Override
-	@Transactional
+	@Transactional(readOnly=true)
 	public Producto findProductoById(Long id) {
 		// TODO Auto-generated method stub
 		return productoDao.findOne(id);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public Factura findFacturabyId(Long id) {
+		// TODO Auto-generated method stub
+		return facturaDao.findOne(id);
 	}
 	
 }
