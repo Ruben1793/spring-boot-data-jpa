@@ -79,7 +79,7 @@ public class FacturaController {
 		}
 		if (itemId==null || itemId.length == 0) {
 			model.addAttribute("titulo","Crear Factura");
-			flash.addFlashAttribute("error", "Error: La factura NO puede no tener líneas!");
+            model.addAttribute("error", "Error: La factura NO puede no tener líneas!");
 			return "factura/form";
 		}
 		for(int i = 0; i < itemId.length; i++) {
