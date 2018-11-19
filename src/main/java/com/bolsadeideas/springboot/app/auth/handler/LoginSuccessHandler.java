@@ -20,8 +20,11 @@ public class LoginSuccessHandler extends SimpleUrlAuthenticationSuccessHandler{
 			Authentication authentication) throws IOException, ServletException {
 		SessionFlashMapManager flashMapManager = new SessionFlashMapManager();
 		FlashMap flashMap = new FlashMap();
-		flashMap.put("success", "Has iniciado sesion con exito");
+		flashMap.put("success", "Hola " + authentication.getName() + " haz iniciado sesion con exito");
 		flashMapManager.saveOutputFlashMap(flashMap, request, response);
+		if (authentication != null) {
+			logger.info("El usuario " + authentication.getName() + "ha iniciado session");
+		}
 		super.onAuthenticationSuccess(request, response, authentication);
 	}
 	
