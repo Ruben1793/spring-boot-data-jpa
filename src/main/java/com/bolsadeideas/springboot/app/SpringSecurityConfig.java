@@ -8,8 +8,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 
+import com.bolsadeideas.springboot.app.auth.handler.LoginSuccessHandler;
+
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
+	
+	@Autowired
+	private LoginSuccessHandler successHandler;
 	
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
@@ -29,7 +34,10 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/factura/**").hasAnyRole("ADMIN")
 		.anyRequest().authenticated()
 		.and()
-		.formLogin().loginPage("/login").permitAll()
+			.formLogin()
+				.successHandler(successHandler)
+				.loginPage("/login")
+				.permitAll()
 		.and()
 		.logout().permitAll()
 		.and()
