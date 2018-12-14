@@ -1,7 +1,5 @@
 package com.bolsadeideas.springboot.app;
 
-import javax.sql.DataSource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,6 +8,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.bolsadeideas.springboot.app.Service.JpaUserDetailService;
 import com.bolsadeideas.springboot.app.auth.handler.LoginSuccessHandler;
 
 @EnableGlobalMethodSecurity(securedEnabled=true, prePostEnabled=true)
@@ -20,7 +19,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	private LoginSuccessHandler successHandler;
 	
 	@Autowired
-	private DataSource dataSource;
+	private JpaUserDetailService userDetailsService;
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
@@ -28,12 +27,15 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	public void configureGlobal(AuthenticationManagerBuilder build) throws Exception {
 		
+		build.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
+		
+		/*
 		build.jdbcAuthentication()
 		.dataSource(dataSource)
 		.passwordEncoder(passwordEncoder)
 		.usersByUsernameQuery("select username, password, enabled from users where username=?")
 		.authoritiesByUsernameQuery("select u.username, a.authority from authorities a inner join users u on (a.user_id = u.id) where username=?");
-		
+		*/
 		/*
 		UserBuilder users = User.withDefaultPasswordEncoder();
 		build.inMemoryAuthentication()
