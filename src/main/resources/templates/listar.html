@@ -14,13 +14,13 @@
 					<thead class="thead-inverse">
 						<tr>
 							<th sec:authorize="hasRole('ROLE_USER')">id</th>
-							<th>nombre</th>
-							<th>apellido</th>
-							<th>email</th>
-							<th>fecha</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">crear factura</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
-							<th sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
+							<th th:text="#{text.cliente.nombre}">nombre</th>
+							<th th:text="#{text.cliente.apellido}">apellido</th>
+							<th th:text="#{text.cliente.email}">email</th>
+							<th th:text="#{text.cliente.createAt}">fecha</th>
+							<th th:text="#{text.cliente.factura.crear}" sec:authorize="hasRole('ROLE_ADMIN')">crear factura</th>
+							<th th:text="#{text.cliente.factura.editar}" sec:authorize="hasRole('ROLE_ADMIN')">editar</th>
+							<th th:text="#{text.cliente.factura.eliminar}" sec:authorize="hasRole('ROLE_ADMIN')">eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
