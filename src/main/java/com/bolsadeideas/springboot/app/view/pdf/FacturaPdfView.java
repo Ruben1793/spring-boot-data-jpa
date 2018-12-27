@@ -23,11 +23,13 @@ public class FacturaPdfView extends AbstractPdfView{
 		Factura factura = (Factura)model.get("factura");
 		
 		PdfPTable tabla = new PdfPTable(1);
+		tabla.setSpacingAfter(20);
 		tabla.addCell("Datos del Cliente");
 		tabla.addCell(factura.getCliente().getNombre() + " " + factura.getCliente().getApellido());
 		tabla.addCell(factura.getCliente().getEmail());
 		
 		PdfPTable tabla2 = new PdfPTable(1);
+		tabla2.setSpacingAfter(20);
 		tabla.addCell("Datos de la Factura");
 		tabla.addCell("Folio: " + factura.getId());
 		tabla.addCell("Descricion: " + factura.getDescripcion());
