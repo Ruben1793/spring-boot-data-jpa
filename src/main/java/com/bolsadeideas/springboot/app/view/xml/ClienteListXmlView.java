@@ -22,13 +22,13 @@ public class ClienteListXmlView extends MarshallingView{
 		super(marshaller);
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
-		@SuppressWarnings("unchecked")
-		Page<Cliente> clientes = (Page<Cliente>) model.get("clientes");
 		model.remove("titulo");
 		model.remove("page");
+		Page<Cliente> clientes = (Page<Cliente>) model.get("clientes");
 		model.remove("clientes");
 		model.put("clienteList", new ClienteList(clientes.getContent()));
 		super.renderMergedOutputModel(model, request, response);
