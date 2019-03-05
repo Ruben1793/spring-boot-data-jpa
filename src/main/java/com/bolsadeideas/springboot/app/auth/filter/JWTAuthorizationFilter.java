@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.auth.filter;
 
+import com.bolsadeideas.springboot.app.auth.SimpleGrantedAuthoritiesMixin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -47,7 +48,9 @@ public class JWTAuthorizationFilter extends BasicAuthenticationFilter {
         if (validToken){
             String username = token.getSubject();
             Object roles = token.get("authorities");
-            Collection<? extends GrantedAuthority> authorities = Arrays.asList(new ObjectMapper().readValue(roles.toString().getBytes(), SimpleGrantedAuthority[].class));
+            Collection<? extends GrantedAuthority> authorities = Arrays.asList(new ObjectMapper()
+                    .addMixIn(SimpleGrantedAuthority.class, SimpleGrantedAuthoritiesMixin.class)
+                    .readValue(roles.toString().getBytes(), SimpleGrantedAuthority[].class));
             authentication = new UsernamePasswordAuthenticationToken(username, null, authorities);
         }
         SecurityContextHolder.getContext().setAuthentication(authentication);
