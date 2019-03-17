@@ -1,6 +1,7 @@
 package com.bolsadeideas.springboot.app.auth.filter;
 
 import com.bolsadeideas.springboot.app.auth.service.JWTService;
+import com.bolsadeideas.springboot.app.auth.service.JWTServiceImpl;
 import com.bolsadeideas.springboot.app.models.entity.Usuario;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -68,7 +69,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             Authentication authResult) throws IOException, ServletException {
 
         String token = jwtService.create(authResult);
-        response.addHeader("Authorization", "Bearer " + token);
+        response.addHeader(JWTServiceImpl.HEADER_STRING, JWTServiceImpl.TOKEN_PREFIX + token);
         Map<String, Object> body = new HashMap<>();
         body.put("token", token);
         body.put("user", (User)authResult.getPrincipal());

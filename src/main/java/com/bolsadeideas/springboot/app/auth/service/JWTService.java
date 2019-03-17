@@ -10,11 +10,11 @@ import java.util.Collection;
 
 public interface JWTService {
 
-    public String create(Authentication auth) throws JsonProcessingException;
-    public boolean validateToken(String token);
-    public Claims getClaims(String token);
-    public String getUsername(String token);
-    public Collection<? extends GrantedAuthority> getRoles(String token) throws IOException;
-    public String resolve(String token);
+    String create(Authentication auth) throws IOException;
+    boolean validateToken(String token);
+    Claims getClaims(String token);
+    String getUsername(String token);
+    Collection<? extends GrantedAuthority> getRoles(String token) throws IOException;
+    String resolve(String token);
 
 }
